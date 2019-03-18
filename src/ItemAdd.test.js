@@ -1,5 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+import sinon from 'sinon';
 
 import ItemAdd from './ItemAdd';
 
@@ -11,5 +12,33 @@ describe('ItemAdd', () => {
         // Assert
         expect(itemAddWrapper.find({name: 'item'})).toHaveLength(1);
         expect(itemAddWrapper.find({name: 'save'})).toHaveLength(1);
+    });
+
+    it('should handle changes to the input', () => {
+        // Setup
+        const itemAddWrapper = shallow(<ItemAdd/>);
+        const event = {target: {name: 'item', value: 'Bobotie'}};
+
+        // Exercise
+        itemAddWrapper.find({name: 'item'}).simulate('change', event);
+
+        // Assert
+        expect(itemAddWrapper.find({value: 'Bobotie'})).toHaveLength(1);
+    });
+
+    it('should send a new person to parent to save', () => {
+        // Setup
+        const onSave = sinon.spy();
+        const itemAddWrapper = shallow(
+            <ItemAdd onSave={onSave}/>
+        );
+        itemAddWrapper.setState({text: 'Quiche'});
+
+        //Exercise
+        itemAddWrapper.find({name: 'save'}).simulate('click');
+
+        // Assert
+        expect(onSave.calledOnce).toBe(true);
+        expect(onSave.calledWith({text: 'Quiche'})).toBe(true);
     });
 });
