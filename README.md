@@ -1,3 +1,7 @@
+## Team Eats
+Accelerating group decision-making by providing an easy way to achieve consensus on food.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
