@@ -8,9 +8,9 @@ class App extends Component {
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
-                    <h4>Team Eats</h4>
+                    <h2>Team Eats</h2>
                 </header>
-                <p><a href="http://www.onlinewebfonts.com">oNline Web Fonts</a></p>
+                <p>Logo by: <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a></p>
             </div>
         );
     }
