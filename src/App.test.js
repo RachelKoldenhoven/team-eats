@@ -3,6 +3,7 @@ import {shallow} from 'enzyme';
 
 import App from './App';
 import ItemAdd from "./ItemAdd";
+import ItemList from './ItemList';
 
 describe('App', () => {
     it('renders without crashing', () => {
@@ -26,20 +27,22 @@ describe('App', () => {
             ]
         });
         const itemList = appWrapper.find(ItemList);
+        const itemAdd = appWrapper.find(ItemAdd);
 
         // assert
         expect(itemList.props().items).toHaveLength(2);
-        expect(typeof itemList.props().onAdd).toEqual('function');
+        expect(typeof itemAdd.props().onSave).toEqual('function');
     });
 
     it('should add new item to list on save', () => {
         // Setup
         const appWrapper = shallow(<App/>);
         const expected = {text: 'Bobotie'};
-        const itemList = appWrapper.find(ItemList);
 
         // Exercise
-        appWrapper.instance().onSave(expected);
+        appWrapper.instance().onSave('Bobotie');
+        appWrapper.update();
+        const itemList = appWrapper.find(ItemList);
 
         // Assert
         expect(itemList.props().items).toContainEqual(expected);

@@ -32,13 +32,14 @@ describe('ItemAdd', () => {
         const itemAddWrapper = shallow(
             <ItemAdd onSave={onSave}/>
         );
-        itemAddWrapper.setState({text: 'Quiche'});
+        itemAddWrapper.setState({item: 'Quiche'});
 
         //Exercise
         itemAddWrapper.find({name: 'save'}).simulate('click');
 
         // Assert
         expect(onSave.calledOnce).toBe(true);
-        expect(onSave.calledWith({text: 'Quiche'})).toBe(true);
+        expect(onSave.calledWith('Quiche')).toBe(true);
+        expect(itemAddWrapper.state().item).toEqual('');
     });
 });

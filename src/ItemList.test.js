@@ -1,6 +1,8 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
+import ItemList from './ItemList';
+
 describe('ItemList', () => {
     it('should display the list of items', () => {
         // setup & exercise
