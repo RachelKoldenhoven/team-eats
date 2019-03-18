@@ -1,9 +1,11 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
+import ItemAdd from './ItemAdd';
+
 describe('ItemAdd', () => {
     it('should render a text box and btn for adding items', () => {
-        // Setup
+        // Setup & Exercise
         const itemAddWrapper = shallow(<ItemAdd/>);
 
         // Assert

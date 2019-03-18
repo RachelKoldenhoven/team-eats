@@ -1,9 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import {shallow} from 'enzyme';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+import App from './App';
+import ItemAdd from "./ItemAdd";
+
+describe('App', () => {
+    it('renders without crashing', () => {
+        const appWrapper = shallow(<App/>);
+        const itemAdd = appWrapper.find(ItemAdd);
+        expect(itemAdd).toHaveLength(1);
+    });
 });
+
+
