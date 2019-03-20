@@ -1,8 +1,7 @@
 {
   "name": "team-eats",
   "scripts": {
-    "test-setup": "ls -l/",
-    "test": "./gradlew --full-stacktrace --debug test"
+    "test": "ls -l / && ./gradlew --full-stacktrace --debug test"
   },
   "formation": {
     "web": {
