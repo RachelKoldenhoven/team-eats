@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.1.3.RELEASE'
 	id 'java'
+	id "com.moowork.node" version "1.2.0"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -17,3 +18,18 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
+node {
+	download = false
+	npmWorkDir = file("${project.buildDir}/npm")
+	nodeModulesDir = file("${project.projectDir}/client")
+}
+
+task copyResources(type: Copy) {
+	from 'client/build/' into 'src/main/resources/static'
+}
+copyResources.dependsOn npm_run_build
+
+processResources.dependsOn copyResources
+
+test.outputs.upToDateWhen {false}
