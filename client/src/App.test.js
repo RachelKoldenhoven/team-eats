@@ -47,6 +47,10 @@ describe('App', () => {
         // Assert
         expect(itemList.props().items).toContainEqual(expected);
     });
+
+    it('should call fetch on ComponentDidMount', () => {
+        // ToDo: find a solution for mocking fetch
+    })
 });
 
 
