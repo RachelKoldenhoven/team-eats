@@ -37,9 +37,9 @@ task copyResources(type: Copy) {
 	from 'client/build/' into 'src/main/resources/static'
 }
 
-npm_run_build.dependsOn npm_run_test
+npm_test.dependsOn npm_run_build
 
-copyResources.dependsOn npm_run_build
+copyResources.dependsOn npm_test
 
 processResources.dependsOn copyResources
 
