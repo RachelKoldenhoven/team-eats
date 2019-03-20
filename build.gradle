@@ -1,0 +1,48 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.3.RELEASE'
+	id 'java'
+	id "com.moowork.node" version "1.2.0"
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.fluentlenium:fluentlenium-core:3.4.1'
+	testCompile 'org.fluentlenium:fluentlenium-junit:3.4.1'
+	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.5.3'
+	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.5.3'
+	testCompile('org.seleniumhq.selenium:selenium-remote-driver:3.5.3')
+	testCompile('org.seleniumhq.selenium:selenium-api:3.5.3')
+	testCompile "org.seleniumhq.selenium:htmlunit-driver:2.27"
+}
+
+node {
+	download = true
+	version = "10.4.0"
+	npmWorkDir = file("${project.buildDir}/npm")
+	nodeModulesDir = file("${project.projectDir}/client")
+	// Set the work directory for unpacking node
+	workDir = file("${project.buildDir}/nodejs")
+}
+
+task copyResources(type: Copy) {
+	from 'client/build/' into 'src/main/resources/static'
+}
+
+npm_test.dependsOn npm_run_build
+
+copyResources.dependsOn npm_test
+
+processResources.dependsOn copyResources
+
+test.outputs.upToDateWhen {false}

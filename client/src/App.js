@@ -13,10 +13,29 @@ class App extends Component {
         }
     }
 
-    onSave = (item) => {
+    async componentDidMount() {
+        await this.getItems();
+    }
+
+    async getItems() {
+        const response = await fetch('/api/items');
+        const data = await response.json();
         const newState = JSON.parse(JSON.stringify(this.state));
-        newState.items.push({text: item});
+        newState.items = data;
         this.setState(newState);
+    }
+
+    onSave = async (item) => {
+        const newItem = {text: item};
+        await fetch('/api/items', {
+            method: 'POST',
+            body: JSON.stringify(newItem),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        });
+        this.getItems();
     };
 
     render() {
