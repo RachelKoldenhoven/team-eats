@@ -14,6 +14,10 @@ class App extends Component {
     }
 
     async componentDidMount() {
+        await this.getItems();
+    }
+
+    async getItems() {
         const response = await fetch('/api/items');
         const data = await response.json();
         const newState = JSON.parse(JSON.stringify(this.state));
@@ -23,7 +27,7 @@ class App extends Component {
 
     onSave = async (item) => {
         const newItem = {text: item};
-        const response = await fetch('/api/items', {
+        await fetch('/api/items', {
             method: 'POST',
             body: JSON.stringify(newItem),
             headers: {
@@ -31,10 +35,7 @@ class App extends Component {
                 'Accept': 'application/json'
             }
         });
-        const itemFromServer = await response.json();
-        const newState = JSON.parse(JSON.stringify(this.state));
-        newState.items.push(itemFromServer);
-        this.setState(newState);
+        this.getItems();
     };
 
     render() {
