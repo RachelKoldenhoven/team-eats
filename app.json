@@ -3,6 +3,11 @@
   "scripts": {
     "test": "./gradlew --full-stacktrace --debug test"
   },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
   "buildpacks": [
     {
       "url": "heroku/gradle"
