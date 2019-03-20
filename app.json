@@ -1,14 +1,13 @@
 {
   "name": "team-eats",
   "scripts": {
-    "test": "ls -l / && ./gradlew --full-stacktrace --debug test"
+    "test": "./gradlew --full-stacktrace --debug test"
   },
   "formation": {
     "web": {
       "quantity": 1
     }
   },
-  "image": "jhoglin/gradle-node",
   "buildpacks": [
     {
       "url": "heroku/gradle"
