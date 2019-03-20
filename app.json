@@ -8,6 +8,7 @@
       "quantity": 1
     }
   },
+  "image": "jhoglin/gradle-node",
   "buildpacks": [
     {
       "url": "heroku/gradle"
