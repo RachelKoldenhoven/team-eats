@@ -35,6 +35,7 @@ describe('App', () => {
     });
 
     it('should add new item to list on save', () => {
+        // ToDo: mock fetch
         // Setup
         const appWrapper = shallow(<App/>);
         const expected = {text: 'Bobotie'};
