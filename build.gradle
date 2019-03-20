@@ -31,6 +31,14 @@ node {
 	version = "10.4.0"
 	npmWorkDir = file("${project.buildDir}/npm")
 	nodeModulesDir = file("${project.projectDir}/client")
+	// Set the work directory for unpacking node
+	workDir = file("${project.buildDir}/nodejs")
+
+	// Set the work directory for NPM
+	npmWorkDir = file("${project.buildDir}/npm")
+
+	// Set the work directory for Yarn
+	yarnWorkDir = file("${project.buildDir}/yarn")
 }
 
 task copyResources(type: Copy) {
