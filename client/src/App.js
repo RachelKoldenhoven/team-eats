@@ -47,6 +47,7 @@ class App extends Component {
                 </header>
                 <ItemList items={this.state.items}/>
                 <ItemAdd onSave={this.onSave}/>
+                <p>The Pull Request for this story will create a review app.</p>
                 <p>Logo by: <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a></p>
             </div>
         );
