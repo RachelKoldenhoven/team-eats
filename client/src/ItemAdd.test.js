@@ -26,7 +26,7 @@ describe('ItemAdd', () => {
         expect(itemAddWrapper.find({value: 'Bobotie'})).toHaveLength(1);
     });
 
-    it('should send a new person to parent to save', () => {
+    it('should send a new item to parent to save', () => {
         // Setup
         const onSave = sinon.spy();
         const itemAddWrapper = shallow(

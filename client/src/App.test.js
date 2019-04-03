@@ -44,7 +44,6 @@ describe('App', () => {
         const expected = {text: 'Bobotie'};
         const url = '/api/items';
         fetchMock
-            .get('/api/items', 200)
             .post('/api/items', 200);
 
         // Exercise

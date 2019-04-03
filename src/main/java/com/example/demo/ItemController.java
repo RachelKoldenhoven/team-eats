@@ -12,6 +12,12 @@ import java.util.UUID;
 
 @RestController
 public class ItemController {
+    private final ItemRepository repository;
+
+    public ItemController(ItemRepository repository) {
+        this.repository = repository;
+    }
+
     public static List<Item> items = new ArrayList<>();
 
     @GetMapping(path = "/api/items", produces = MediaType.APPLICATION_JSON_VALUE)
