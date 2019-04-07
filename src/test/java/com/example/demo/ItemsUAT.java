@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -41,14 +42,17 @@ public class ItemsUAT extends FluentTest {
         return driver;
     }
 
+    @Autowired
+    ItemRepository repository;
+
     @Before
     public void before() {
-        ItemController.items.clear();
+        repository.deleteAll();
     }
 
     @After
     public void after() {
-        ItemController.items.clear();
+        repository.deleteAll();
     }
 
     @Test
@@ -56,7 +60,7 @@ public class ItemsUAT extends FluentTest {
         // Given that I have a web browser
         // Setup
         Item testItem = new Item("123", "Saag");
-        ItemController.items.add(testItem);
+        repository.save(testItem);
 
         // When I navigate to the app
         // Exercise
@@ -84,6 +88,5 @@ public class ItemsUAT extends FluentTest {
         // Then I see the item in a list
         FluentWebElement savedItem = $("li").get(0);
         assertThat(savedItem.text()).isEqualTo("Baingan Bharta");
-        //assertThat(ItemController.items.get(0)). text is equal to 'baingan bharta
     }
 }

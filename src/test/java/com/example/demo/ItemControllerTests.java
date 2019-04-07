@@ -2,7 +2,9 @@ package com.example.demo;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +28,25 @@ public class ItemControllerTests {
 	@Autowired
 	ItemController cut;
 
+	@Autowired
+	ItemRepository repository;
+
 	private ObjectMapper mapper = new ObjectMapper();
+
+	@Before
+	public void before() {
+		repository.deleteAll();
+	}
+
+	@After
+	public void after() {
+		repository.deleteAll();
+	}
 
 
 	@Test
 	public void shouldCreateNewItem() throws Exception {
 		// Setup
-		cut.items.clear();
 		Item expected = new Item(null, "Saag");
 		System.out.println(expected);
 		String json = mapper.writeValueAsString(expected);
@@ -54,10 +68,8 @@ public class ItemControllerTests {
 		System.out.println(actual);
 		Assert.assertTrue("POST response should match what was in request", expected.equals(actual));
 
-		Assert.assertEquals("Memory has only one item", cut.items.size(), 1);
-
-		Item savedItemActual = cut.items.get(0);
-		Assert.assertTrue("Memory should match what was in request", expected.equals(savedItemActual));
+		Item dbActual = repository.findById(actual.getId()).get();
+		Assert.assertTrue("Database should match what was in request", expected.equals(dbActual));
 	}
 
 }

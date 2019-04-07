@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,17 +17,15 @@ public class ItemController {
         this.repository = repository;
     }
 
-    public static List<Item> items = new ArrayList<>();
-
     @GetMapping(path = "/api/items", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Item> getItems() {
-        return items;
+        return this.repository.findAll();
     }
 
     @PostMapping(path = "/api/items", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Item createItem(@RequestBody Item item) {
         item.setId(UUID.randomUUID().toString());
-        items.add(item);
+        this.repository.save(item);
         return item;
     }
 }
