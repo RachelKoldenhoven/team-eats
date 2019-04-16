@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import fetchMock from 'fetch-mock';
 
 import App from './App';
-import ItemAdd from "./ItemAdd";
+import ItemAdd from './ItemAdd';
 import ItemList from './ItemList';
 
 

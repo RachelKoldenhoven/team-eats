@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 export default class ItemAdd extends Component {
     constructor(props) {
         super(props);
         this.state = {
             item: ''
-        }
+        };
     }
 
     editName = (event) => {
@@ -25,14 +25,16 @@ export default class ItemAdd extends Component {
     render() {
         return (
             <div>
-                <input name="item"
-                       onChange={this.editName}
-                       value={this.state.item}/>
-                <button name="save"
-                        onClick={this.handleClick}>
+                <input
+                    name="item"
+                    onChange={this.editName}
+                    value={this.state.item}/>
+                <button
+                    name="save"
+                    onClick={this.handleClick}>
                     Save
                 </button>
             </div>
-        )
+        );
     }
 }
